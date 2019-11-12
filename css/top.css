@@ -1,0 +1,29 @@
+body {
+    background: #283c5f;
+}
+
+.Logo {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    animation: fadeInAndRotateLogo 1s;
+}
+
+.Logo__Link {
+    text-decoration: none;
+    color: white;
+}
+
+@keyframes fadeInAndRotateLogo {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(-50%) rotate(180deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(-50%) rotate(0deg);
+    }
+}
