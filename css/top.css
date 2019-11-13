@@ -1,5 +1,65 @@
 body {
     background: #283c5f;
+    overflow: hidden;
+}
+
+.Scene {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.Scene.--first {
+    z-index: 1000;
+}
+
+.Scene.--second {
+    display: flex;
+    z-index: 999;
+}
+
+.Scene.--first .Scene_Item {
+    width: 100vw;
+    height: 50vh;
+    border: 1px #283c5f;
+    background: white;
+}
+
+.Scene.--first .Scene_Item {
+    width: 100vw;
+    height: 50vh;
+    border: 1px #283c5f;
+    background: white;
+}
+
+.Scene.--second .Scene_Item {
+    width: 50vw;
+    height: 100vh;
+    border: 1px #5f2828;
+    background: #5f2828;
+}
+
+.Scene.--second .Scene_Item {
+    width: 50vw;
+    height: 100vh;
+    border: 1px #5f2828;
+    background: #5f2828;
+}
+
+.Scene_Item.--top {
+    animation: 1s sceneTop 0s 1 normal forwards;
+}
+
+.Scene_Item.--bottom {
+    animation: 1s sceneBottom 0s 1 normal forwards;
+}
+
+.Scene_Item.--right {
+    animation: 1s sceneRight 0.5s 1 normal forwards;
+}
+
+.Scene_Item.--left {
+    animation: 1s sceneLeft 0.5s 1 normal forwards;
 }
 
 .Logo {
@@ -7,14 +67,128 @@ body {
     text-align: center;
     top: 50%;
     left: 50%;
+    opacity: 0;
     transform: translateY(-50%) translateX(-50%);
     -webkit-transform: translateY(-50%) translateX(-50%);
-    animation: fadeInAndRotateLogo 1s;
+    animation: 1s fadeInAndRotateLogo 0.5s 1 normal forwards;
+}
+
+.Logo__Wrapper {
+    display: flex;
+}
+
+.Logo__Wrapper.--small {
+    margin: 8px 0;
+}
+
+.Logo span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    font-size: 5rem;
+    border: dashed 2px #888;
+    box-sizing: border-box;
+}
+
+.Logo .--small span {
+    height: 50px;
+    width: 50px;
+    font-size: 2.5rem;
+}
+
+.Logo span:not(:last-child) {
+    border-right: none;
 }
 
 .Logo__Link {
     text-decoration: none;
     color: white;
+}
+
+.Remilia {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    animation: 0.5s fadeInRemilia 1.5s 1 normal forwards, 0.5s vibration 4s infinite;
+}
+
+.ProfileImageWrapper {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    position: relative;
+    background-color: transparent;
+    width: 140px;
+    height: 140px;
+    padding: 0;
+    opacity: 0;
+    z-index: 2000;
+    animation: 0.5s fadeIn 2s 1 normal forwards;
+}
+
+.ProfileImageWrapper::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.05);
+    -webkit-animation: wave 1.4s ease-in-out 0s infinite;
+    animation: wave 1.4s ease-in-out 0s infinite;
+}
+
+.ProfileImage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.ProfileImage::before, .ProfileImage::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+}
+
+.ProfileImage::before {
+    background-size: cover;
+    background-position: center;
+}
+
+.ProfileImage::after {
+    content: "Open";
+    font-size: 22px;
+    color: #fff;
+    -webkit-letter-spacing: .2em;
+    -moz-letter-spacing: .2em;
+    -ms-letter-spacing: .2em;
+    letter-spacing: .2em;
+    text-align: center;
+    line-height: 140px;
+    opacity: 0;
+}
+
+@media (min-width: 1025px) {
+    .Remilia__Image {
+        max-width: 500px;
+    }
 }
 
 @keyframes fadeInAndRotateLogo {
@@ -25,5 +199,91 @@ body {
     100% {
         opacity: 1;
         transform: translateY(-50%) translateX(-50%) rotate(0deg);
+    }
+}
+
+@keyframes fadeInRemilia {
+    0% {
+        opacity: 0;
+        transform: translateY(150%) translateX(150%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) translateX(0);
+    }
+}
+
+@keyframes sceneTop {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-200%);
+    }
+}
+
+@keyframes sceneBottom {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(200%);
+    }
+}
+
+@keyframes sceneRight {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(200%);
+    }
+}
+
+@keyframes sceneLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
+
+@keyframes vibration {
+    0% {
+        transform: translate(0px, 0px) rotateZ(0deg)
+    }
+    25% {
+        transform: translate(2px, 2px) rotateZ(1deg)
+    }
+    50% {
+        transform: translate(0px, 2px) rotateZ(0deg)
+    }
+    75% {
+        transform: translate(2px, 0px) rotateZ(-1deg)
+    }
+    100% {
+        transform: translate(0px, 0px) rotateZ(0deg)
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: scale(1.15);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
     }
 }
