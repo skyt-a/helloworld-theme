@@ -1,6 +1,8 @@
 body {
-    background: #283c5f;
+    background: white;
     overflow: hidden;
+    width: 100vw;
+    height: 100vh;
 }
 
 .Scene {
@@ -9,20 +11,20 @@ body {
     left: 0;
 }
 
+.Scene {
+    height: 100vh;
+    width: 100vw;
+}
+
 .Scene.--first {
     z-index: 1000;
+    animation: 1s scene 0s 1 normal forwards;
 }
 
 .Scene.--second {
     display: flex;
     z-index: 999;
-}
-
-.Scene.--first .Scene_Item {
-    width: 100vw;
-    height: 50vh;
-    border: 1px #283c5f;
-    background: white;
+    animation: 1s scene 1s 1 normal forwards;
 }
 
 .Scene.--first .Scene_Item {
@@ -35,15 +37,8 @@ body {
 .Scene.--second .Scene_Item {
     width: 50vw;
     height: 100vh;
-    border: 1px #5f2828;
-    background: #5f2828;
-}
-
-.Scene.--second .Scene_Item {
-    width: 50vw;
-    height: 100vh;
-    border: 1px #5f2828;
-    background: #5f2828;
+    border: 1px #283c5f;
+    background: #283c5f;
 }
 
 .Scene_Item.--top {
@@ -62,19 +57,30 @@ body {
     animation: 1s sceneLeft 0.5s 1 normal forwards;
 }
 
-.Logo {
+.Message {
     position: absolute;
-    text-align: center;
     top: 50%;
     left: 50%;
-    opacity: 0;
     transform: translateY(-50%) translateX(-50%);
     -webkit-transform: translateY(-50%) translateX(-50%);
-    animation: 1s fadeInAndRotateLogo 0.5s 1 normal forwards;
+    font-size: 3rem;
+    text-align: center;
+    opacity: 0;
+    animation: 2s message 0.5s 1 normal forwards;
+}
+
+.Logo {
+    text-align: center;
+    opacity: 0;
+    animation: 1s fadeInAndRotateLogo 2.5s 1 normal forwards;
 }
 
 .Logo__Wrapper {
     display: flex;
+}
+
+.Logo__Wrapper:last-child span {
+    border-top: none;
 }
 
 .Logo__Wrapper.--small {
@@ -116,7 +122,11 @@ body {
     animation: 0.5s fadeInRemilia 1.5s 1 normal forwards, 0.5s vibration 4s infinite;
 }
 
-.ProfileImageWrapper {
+.ProfileImage__Container {
+    margin-top: 16px;
+}
+
+.ProfileImage__Wrapper {
     display: inline-block;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -128,11 +138,10 @@ body {
     height: 140px;
     padding: 0;
     opacity: 0;
-    z-index: 2000;
-    animation: 0.5s fadeIn 2s 1 normal forwards;
+    animation: 0.5s fadeIn 3s 1 normal forwards;
 }
 
-.ProfileImageWrapper::after {
+.ProfileImage__Wrapper::after {
     content: "";
     display: block;
     position: absolute;
@@ -172,17 +181,40 @@ body {
     background-position: center;
 }
 
-.ProfileImage::after {
-    content: "Open";
-    font-size: 22px;
-    color: #fff;
-    -webkit-letter-spacing: .2em;
-    -moz-letter-spacing: .2em;
-    -ms-letter-spacing: .2em;
-    letter-spacing: .2em;
+.Circle {
+    position: absolute;
+    width: 80vw;
+    height: 80vw;
+    border-radius: 20px;
     text-align: center;
-    line-height: 140px;
+    top: 50%;
+    left: 50%;
     opacity: 0;
+    animation: 1s circleSkew 0.5s 1 normal forwards;
+}
+
+@media (max-width: 767px) {
+    .Logo span {
+        width: calc((100vw - 10vw) / 6);
+        height: calc((100vw - 10vw) / 6);
+        font-size: 2em;
+        border: dashed 1px #888;
+    }
+
+    .Logo .--small span {
+        height: calc((100vw - 10vw) / 12);
+        width: calc((100vw - 10vw) / 12);
+        font-size: 1em;
+    }
+
+    .Remilia__Image {
+        display: none;
+    }
+
+    .ProfileImage__Wrapper {
+        width: 70px;
+        height: 70px;
+    }
 }
 
 @media (min-width: 1025px) {
@@ -194,11 +226,11 @@ body {
 @keyframes fadeInAndRotateLogo {
     0% {
         opacity: 0;
-        transform: translateY(-50%) translateX(-50%) rotate(180deg);
+        transform: translateY(200%);
     }
     100% {
         opacity: 1;
-        transform: translateY(-50%) translateX(-50%) rotate(0deg);
+        transform: translateY(0);
     }
 }
 
@@ -213,39 +245,63 @@ body {
     }
 }
 
-@keyframes sceneTop {
+@keyframes scene {
     0% {
-        transform: translateY(0);
+        visibility: inherit;
+    }
+    99% {
+        visibility: inherit;
     }
     100% {
-        transform: translateY(-200%);
+        visibility: hidden;
+    }
+}
+
+@keyframes sceneTop {
+    0% {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+    100% {
+        transform: scaleY(0);
+        transform-origin: top;
+        visibility: hidden;
     }
 }
 
 @keyframes sceneBottom {
     0% {
-        transform: translateY(0);
+        transform: scaleY(1);
+        transform-origin: bottom;
     }
     100% {
-        transform: translateY(200%);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        visibility: hidden;
     }
 }
 
 @keyframes sceneRight {
     0% {
-        transform: translateX(0);
+        transform: scaleX(1);
+        transform-origin: right;
     }
     100% {
-        transform: translateX(200%);
+        transform: scaleX(0);
+        transform-origin: right;
+        visibility: hidden;
     }
 }
 
 @keyframes sceneLeft {
     0% {
-        transform: translateX(0);
+        transform: scaleX(1);
+        transform-origin: left;
     }
     100% {
-        transform: translateX(-200%);
+        transform: scaleX(0);
+        transform-origin: left;
+        visibility: hidden;
     }
 }
 
@@ -285,5 +341,35 @@ body {
     }
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes circleSkew {
+    0% {
+        transform: skew(0deg, 0deg) rotateZ(0deg) translateY(-50%) translateX(-50%);
+    }
+    25% {
+        transform: skew(15deg, 15deg) rotateZ(1deg) translateY(-50%) translateX(-50%);
+    }
+    50% {
+        transform: skew(0deg, 15deg) rotateZ(0deg) translateY(-50%) translateX(-50%);
+    }
+    75% {
+        transform: skew(15deg, 0deg) rotateZ(-1deg) translateY(-50%) translateX(-50%);
+    }
+    100% {
+        transform: skew(0deg, 0deg) rotateZ(0deg) translateY(-50%) translateX(-50%)
+    }
+}
+
+@keyframes message {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
     }
 }

@@ -15,3 +15,5 @@
 
 /* 以下、好みに応じて子テーマ用の関数をお書きください。
  ( Below here, please write down your own functions for the child theme. ) */
+ update_option('siteurl','https://hello-world.site');
+ update_option('home','https://hello-world.site');
