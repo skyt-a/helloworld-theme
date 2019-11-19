@@ -91,8 +91,8 @@ body {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-color: white;
     font-size: 5rem;
     border: dashed 2px #888;
@@ -100,8 +100,8 @@ body {
 }
 
 .Logo .--small span {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     font-size: 2.5rem;
 }
 
@@ -134,8 +134,8 @@ body {
     border: none;
     position: relative;
     background-color: transparent;
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
     padding: 0;
     opacity: 0;
     animation: 0.5s fadeIn 3s 1 normal forwards;
@@ -193,6 +193,28 @@ body {
     animation: 1s circleSkew 0.5s 1 normal forwards;
 }
 
+.Menu {
+    display: flex;
+    opacity: 0;
+    animation: 1s fadeInAndRotateLogo 3s 1 normal forwards;
+}
+
+.Menu span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    font-size: 1rem;
+    border: dashed 1px #888;
+    box-sizing: border-box;
+}
+
+.Menu span:not(:last-child) {
+    border-right: none;
+}
+
 @media (max-width: 767px) {
     .Logo span {
         width: calc((100vw - 10vw) / 6);
@@ -200,17 +222,14 @@ body {
         font-size: 2em;
         border: dashed 1px #888;
     }
-
     .Logo .--small span {
         height: calc((100vw - 10vw) / 12);
         width: calc((100vw - 10vw) / 12);
         font-size: 1em;
     }
-
     .Remilia__Image {
         display: none;
     }
-
     .ProfileImage__Wrapper {
         width: 70px;
         height: 70px;
