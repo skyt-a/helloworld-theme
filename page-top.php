@@ -1,15 +1,17 @@
 <?php /* Template Name: Top */ ?>
 <?php
-function get_version () {
+function get_version() {
     $theme = wp_get_theme();
-    return $theme['Version'];
+    return '?version=' . $theme['Version'];
 }
-function get_theme_asset_uri ($path) {
-    return get_theme_file_uri($path);
+function get_theme_asset_uri($path) {
+    return get_theme_file_uri($path) . get_version();
 }
+wp_deregister_style('luxeritas');
+wp_dequeue_style('luxeritas');
 ?>
 <!DOCTYPE html>
-<html lang="ja" class="wf-tbchibirgothicplusk-pro-n4-active wf-active">
+<html lang="ja" class="hello-world">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -75,12 +77,13 @@ function get_theme_asset_uri ($path) {
                 <div>R</div>
                 <div>O</div>
                 <div>L</div>
+                <div>L</div>
             </section>
         </section>
         <section class="ProfileImage__Container">
             <a class="ProfileImage__Wrapper" href="https://twitter.com/RinGoku98" target="_blank" rel="noopener">
                 <img src="<?= get_theme_asset_uri("images/ringoku.jpg") ?>"
-                     class="ProfileImage" alt="RinGoku98"/>
+                class="ProfileImage" alt="RinGoku98"/>
             </a>
             <a class="ProfileImage__Wrapper" href="https://twitter.com/neet_dot" target="_blank" rel="noopener">
                 <img src="<?= get_theme_asset_uri("images/neet.jpg") ?>"
@@ -92,7 +95,7 @@ function get_theme_asset_uri ($path) {
             <section class="Main__Section">
                 <div class="Main__Section_Title">カリスマを取り戻せ</div>
                 <section class="Main__Section_Description">
-                    <div>
+                    <div class="Main__Section_Description_Image_Wrapper">
                         <img src="<?= get_theme_asset_uri("images/Reclaim_the_Charisma.png") ?>" class="Main__Section_Description_Image" alt="カリスマを取り戻せ">
                         <img class="Main__Section_Description_Image" src="<?= get_theme_asset_uri("images/Remilia.png") ?>" alt="自機(レミリア)"/>
                     </div>
